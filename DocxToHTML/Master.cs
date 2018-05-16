@@ -29,7 +29,7 @@ namespace DocxToHTML
             executionPath = executionPath + @"\EditorInit.html";
             wbHTMLViewer.Navigate(executionPath);
             Application.DoEvents();
-            wbHTMLViewer.Document.InvokeScript("InitEditor");
+            //wbHTMLViewer.Document.InvokeScript("InitEditor");
         }
 
         private void btnOpenFile_Click(object sender, EventArgs e)

@@ -2,9 +2,45 @@
 <head>
 <!--    <script src='http://ckeditor.com/apps/ckeditor/4.2/ckeditor.js?mriyyd'></script>-->
 
-    <script src='ckeditor/ckeditor.js'></script>
+  
+</head>
+<body>
+    <textarea cols='80' id='editor1' name='editor1' rows="80" >
+        <span>Welcome to Docx - HTML Converter</span>
+    </textarea>
+
+  <!--  <script src='./ckeditor/ckeditor.js'></script>-->
     <script type='text/javascript'>
+
+        function loadScript(url, callback) {
+
+            var script = document.createElement("script")
+            script.type = "text/javascript";
+
+            if (script.readyState) {  //IE
+                script.onreadystatechange = function () {
+                    if (script.readyState == "loaded" ||
+                            script.readyState == "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  //Others
+                script.onload = function () {
+                    callback();
+                };
+            }
+
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+
         var editor1, html = '';
+
+        loadScript('./ckeditor/ckeditor.js', function () {
+            InitEditor();
+        });
 
         function InitEditor() { editor1= CKEDITOR.replace('editor1'); }
 
@@ -12,22 +48,17 @@
             if (!editor1)
                 return;
             html = editor1.getData();
-            return html
+            return html;
 
         }
 
         function setHtml(vsHtml) {
             if (!editor1)
                 return;
-            editor1.setData(vsHtml)
+            editor1.setData(vsHtml);
         }
 
 
     </script>
-</head>
-<body>
-    <textarea cols='80' id='editor1' name='editor1' rows="80" >
-        <span>Welcome to Docx - HTML Converter</span>
-    </textarea>
 </body>
 </html>

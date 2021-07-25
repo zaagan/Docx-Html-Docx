@@ -1,2 +1,2 @@
 # Docx-Html-Docx
-A sample application to convert Docs to Html and Html to Docx
+Using C#, Convert Doc file to Html and vice-versa

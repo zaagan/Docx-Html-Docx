@@ -1,15 +1,31 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<AssemblyTitle>DocxToHTML.Converter</AssemblyTitle>
-		<Product>DocxToHTML.Converter</Product>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="DocumentFormat.OpenXml" Version="3.0.2" />
-		<PackageReference Include="OpenXmlPowerTools-NetStandard" Version="4.4.21" />
-		<PackageReference Include="System.Drawing.Common" Version="8.0.6" />
-		<PackageReference Include="System.IO.Packaging" Version="8.0.0" />
-	</ItemGroup>
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition="Exists('$(NuGetPackageRoot)net4x.nugetutility/$(NuGetUtilityVersion)/build/NuGet.Utility.props')" Project="$(NuGetPackageRoot)net4x.nugetutility/$(NuGetUtilityVersion)/build/NuGet.Utility.props" />
+    <PropertyGroup>
+        <PackageOutputPath>$(SolutionDir)Packages/</PackageOutputPath>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Version>$(VersionPrefix).$(VersionSuffix)</Version>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyTitle>DocxToHtml.Converter</AssemblyTitle>
+        <Product>DocxToHtml.Converter</Product>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <PackageId>Net4x.$(AssemblyName)</PackageId>
+        <SignAssembly>True</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\DocxToHtml.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.2" />
+        <PackageReference Include="Net4x.NuGetUtility" PrivateAssets="All" Version="$(NuGetUtilityVersion)" />
+        <PackageReference Include="OpenXmlPowerTools-NetStandard" Version="4.4.21" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.6" />
+        <PackageReference Include="System.IO.Packaging" Version="8.0.0" />
+    </ItemGroup>
+    <PropertyGroup>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="README.md" Link="README.md" Pack="true" PackagePath="\README.md" />
+    </ItemGroup>
+    <Import Condition="Exists('$(NuGetPackageRoot)net4x.nugetutility/$(NuGetUtilityVersion)/build/NuGet.Utility.targets')" Project="$(NuGetPackageRoot)net4x.nugetutility/$(NuGetUtilityVersion)/build/NuGet.Utility.targets" />
 </Project>

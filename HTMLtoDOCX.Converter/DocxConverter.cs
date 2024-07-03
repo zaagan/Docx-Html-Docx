@@ -4,11 +4,11 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System.IO;
 using HtmlToOpenXml;
 
-namespace HTMLtoDOCX.Converter;
+namespace HtmlToDocx.Converter;
 
 public class DocxConverter
 {
-    public int ConvertToDocx(string html, string filename)
+    public int ConvertToDocx(string Html, string filename)
     {
         try
         {
@@ -24,7 +24,7 @@ public class DocxConverter
             }
 
             var converter = new HtmlConverter(mainPart);
-            converter.ParseHtml(html);
+            converter.ParseHtml(Html);
 
             mainPart.Document.Save();
 

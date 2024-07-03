@@ -1,10 +1,10 @@
-﻿using HTMLtoDOCX.Converter;
+﻿using HtmlToDocx.Converter;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DocxToHTML;
+namespace DocxToHtml;
 
 public partial class Master : Form
 {
@@ -17,17 +17,17 @@ public partial class Master : Form
     }
 
     /// <summary>
-    /// Source : http://stackoverflow.com/questions/5987432/can-the-ckeditor-be-used-in-a-winforms-application-for-xhtml-editing
-    /// Source : http://stackoverflow.com/questions/31119631/getting-and-setting-ckeditor-html-in-a-c-net-winform-app
+    /// Source : http://stackoverflow.com/questions/5987432/can-the-ckeditor-be-used-in-a-winforms-application-for-xHtml-editing
+    /// Source : http://stackoverflow.com/questions/31119631/getting-and-setting-ckeditor-Html-in-a-c-net-winform-app
     /// 
     /// </summary>
     private void InitEditor()
     {
         var executionPath = Path.GetDirectoryName(Application.ExecutablePath);
-        executionPath = executionPath + @"\EditorInit.html";
-        wbHTMLViewer.Navigate(executionPath);
+        executionPath = executionPath + @"\EditorInit.Html";
+        wbHtmlViewer.Navigate(executionPath);
         Application.DoEvents();
-        //wbHTMLViewer.Document.InvokeScript("InitEditor");
+        //wbHtmlViewer.Document.InvokeScript("InitEditor");
     }
 
     private void btnOpenFile_Click(object sender, EventArgs e)
@@ -51,17 +51,17 @@ public partial class Master : Form
             if (File.Exists(currentFile))
             {
                 Cursor = Cursors.WaitCursor;
-                var htmlOutput = string.Empty;
+                var HtmlOutput = string.Empty;
                 Task.Factory.StartNew(() =>
                 {
-                    var converter = new Converter.HTMLConverter();
-                    htmlOutput = converter.ConvertToHtml(currentFile);
+                    var converter = new Converter.HtmlConverter();
+                    HtmlOutput = converter.ConvertToHtml(currentFile);
                 }).Wait();
 
 
                 var objArray = new Object[1];
-                objArray[0] = htmlOutput;
-                wbHTMLViewer.Document!.InvokeScript("setHtml", objArray);
+                objArray[0] = HtmlOutput;
+                wbHtmlViewer.Document!.InvokeScript("setHtml", objArray);
             }
             else
             { MessageBox.Show(@"File does not exist", @"File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
@@ -75,10 +75,10 @@ public partial class Master : Form
         }
     }
 
-    private void btnSaveHTML_Click(object sender, EventArgs e)
+    private void btnSaveHtml_Click(object sender, EventArgs e)
     {
 
-        var sHtml = (string)wbHTMLViewer.Document!.InvokeScript("getHtml");
+        var sHtml = (string)wbHtmlViewer.Document!.InvokeScript("getHtml");
 
         var saveFileDiag = new SaveFileDialog();
         saveFileDiag.Filter = @"Docx File (.docx) |*.docx";

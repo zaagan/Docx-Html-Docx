@@ -1,4 +1,4 @@
-﻿<html>
+﻿<Html>
 <head>
 <!--    <script src='http://ckeditor.com/apps/ckeditor/4.2/ckeditor.js?mriyyd'></script>-->
 
@@ -6,7 +6,7 @@
 </head>
 <body>
     <textarea cols='80' id='editor1' name='editor1' rows="80" >
-        <span>Welcome to Docx - HTML Converter</span>
+        <span>Welcome to Docx - Html Converter</span>
     </textarea>
 
   <!--  <script src='./ckeditor/ckeditor.js'></script>-->
@@ -36,7 +36,7 @@
         }
 
 
-        var editor1, html = '';
+        var editor1, Html = '';
 
         loadScript('./ckeditor/ckeditor.js', function () {
             InitEditor();
@@ -47,8 +47,8 @@
         function getHtml() {
             if (!editor1)
                 return;
-            html = editor1.getData();
-            return html;
+            Html = editor1.getData();
+            return Html;
 
         }
 
@@ -61,4 +61,4 @@
 
     </script>
 </body>
-</html>
+</Html>

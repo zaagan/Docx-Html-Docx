@@ -5,9 +5,9 @@ using DocumentFormat.OpenXml.Packaging;
 using System.Drawing.Imaging;
 using System.Xml.Linq;
 
-namespace DocxToHTML.Converter;
+namespace DocxToHtml.Converter;
 
-public class HTMLConverter
+public class HtmlConverter
 {
 
 
@@ -18,10 +18,10 @@ public class HTMLConverter
 
         var fileInfo = new FileInfo(fullFilePath);
 
-        var htmlText = string.Empty;
+        var HtmlText = string.Empty;
         try
         {
-            htmlText = ParseDOCX(fileInfo);
+            HtmlText = ParseDocx(fileInfo);
         }
         catch (OpenXmlPackageException e)
         {
@@ -32,12 +32,12 @@ public class HTMLConverter
                 {
                     UriFixer.FixInvalidUri(fs, FixUri);
                 }
-                htmlText = ParseDOCX(fileInfo);
+                HtmlText = ParseDocx(fileInfo);
             }
         }
 
 
-        return htmlText;
+        return HtmlText;
 
 
     }
@@ -60,7 +60,7 @@ public class HTMLConverter
     }
 
 
-    private string ParseDOCX(FileInfo fileInfo)
+    private string ParseDocx(FileInfo fileInfo)
     {
 
         try
@@ -131,11 +131,11 @@ public class HTMLConverter
                 }
             };
 
-            var htmlElement = WmlToHtmlConverter.ConvertToHtml(wDoc, settings);
+            var HtmlElement = WmlToHtmlConverter.ConvertToHtml(wDoc, settings);
 
-            var html = new XDocument(new XDocumentType("html", null, null, null), htmlElement);
-            var htmlString = html.ToString(SaveOptions.DisableFormatting);
-            return htmlString;
+            var Html = new XDocument(new XDocumentType("Html", null, null, null), HtmlElement);
+            var HtmlString = Html.ToString(SaveOptions.DisableFormatting);
+            return HtmlString;
         }
         catch
         {

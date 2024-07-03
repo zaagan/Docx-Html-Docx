@@ -1,13 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11919.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocxToHTML", "DocxToHTML\DocxToHTML.csproj", "{3C465D28-3E5B-4C05-8648-D0D83EACA98E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocxToHtml", "DocxToHtml\DocxToHtml.csproj", "{3C465D28-3E5B-4C05-8648-D0D83EACA98E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocxToHTML.Converter", "DocxToHTML.Converter\DocxToHTML.Converter.csproj", "{B5447989-A3E9-4278-9BA7-8DECFFDF4842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocxToHtml.Converter", "DocxToHtml.Converter\DocxToHtml.Converter.csproj", "{B5447989-A3E9-4278-9BA7-8DECFFDF4842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLtoDOCX.Converter", "HTMLtoDOCX.Converter\HTMLtoDOCX.Converter.csproj", "{52C3A9EE-D306-419F-BFFC-41F054DE5351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlToDocx.Converter", "HtmltoDocx.Converter\HtmlToDocx.Converter.csproj", "{52C3A9EE-D306-419F-BFFC-41F054DE5351}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39F6E38D-A44D-4D21-91E3-9029A1FE895E}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.Props = Directory.Build.Props
+		Directory.NuGet.props = Directory.NuGet.props
+		NuGet.Config = NuGet.Config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +37,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A532157D-738C-4EFE-8626-6992B210D87F}
 	EndGlobalSection
 EndGlobal

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace DocxToHTML.Converter;
+namespace DocxToHtml.Converter;
 
 public static class UriFixer
 {

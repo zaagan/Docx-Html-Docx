@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net462;net8.0-windows</TargetFrameworks>
+		<TargetFrameworks>net462;net8.0-windows;net10.0-windows</TargetFrameworks>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-		<AssemblyTitle>DocxToHTML</AssemblyTitle>
-		<Product>DocxToHTML</Product>
+		<AssemblyTitle>DocxToHtml</AssemblyTitle>
+		<Product>DocxToHtml</Product>
 		<ApplicationIcon>geek.ico</ApplicationIcon>
 		<UseWindowsForms>true</UseWindowsForms>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\DocxToHtml.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
@@ -19,11 +21,11 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\DocxToHTML.Converter\DocxToHTML.Converter.csproj" />
-		<ProjectReference Include="..\HTMLtoDOCX.Converter\HTMLtoDOCX.Converter.csproj" />
+		<ProjectReference Include="..\DocxToHtml.Converter\DocxToHtml.Converter.csproj" />
+		<ProjectReference Include="..\HtmlToDocx.Converter\HtmlToDocx.Converter.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="EditorInit.html">
+		<Content Include="EditorInit.Html">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="geek.ico" />

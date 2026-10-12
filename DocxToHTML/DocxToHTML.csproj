@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net462;net8.0-windows</TargetFrameworks>
+		<TargetFrameworks>net462;net8.0-windows;net10.0-windows</TargetFrameworks>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<AssemblyTitle>DocxToHtml</AssemblyTitle>
 		<Product>DocxToHtml</Product>

@@ -6,7 +6,8 @@
 		<AssemblyTitle>DocxToHtml</AssemblyTitle>
 		<Product>DocxToHtml</Product>
 		<ApplicationIcon>geek.ico</ApplicationIcon>
-		<UseWindowsForms>true</UseWindowsForms>
+		<UseWindowsForms>true</UseWindowsForms>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<SignAssembly>True</SignAssembly>

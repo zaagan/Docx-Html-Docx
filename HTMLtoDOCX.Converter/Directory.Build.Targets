@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+        <ParentDirectoryBuildTargets>$([MSBuild]::GetPathOfFileAbove('Directory.Build.Targets', '$(MSBuildThisFileDirectory)../'))</ParentDirectoryBuildTargets>
+    </PropertyGroup>
+    <Import Project="$(ParentDirectoryBuildTargets)" Condition="'$(ParentDirectoryBuildTargets)'!=''" />
+    <PropertyGroup>
+        <NuGetPackageRoot Condition="'$(NuGetPackageRoot)'=='' and '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))'=='true'">$(USERPROFILE)\.nuget\packages\</NuGetPackageRoot>
+        <NuGetPackageRoot Condition="'$(NuGetPackageRoot)'=='' and '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))'!='true'">~/.nuget/packages/</NuGetPackageRoot>
+        <NuGetUtilityVersion Condition="'$(NuGetUtilityVersion)'==''">1.0.15</NuGetUtilityVersion>
+    </PropertyGroup>
+    <Import Project="$(NuGetPackageRoot)net4x.nugetutility/$(NuGetUtilityVersion)/build/NuGet.Utility.targets" Condition="Exists('$(NuGetPackageRoot)net4x.nugetutility/$(NuGetUtilityVersion)/build/NuGet.Utility.targets')" />
+</Project>

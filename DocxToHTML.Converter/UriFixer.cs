@@ -5,71 +5,69 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace DocxToHTML.Converter
-{
-    public static class UriFixer
-    {
-        public static void FixInvalidUri(Stream fs, Func<string, string> invalidUriHandler)
-        {
+namespace DocxToHtml.Converter;
 
-            XNamespace relNs = "http://schemas.openxmlformats.org/package/2006/relationships";
-            using (ZipArchive za = new ZipArchive(fs, ZipArchiveMode.Update))
+public static class UriFixer
+{
+    public static void FixInvalidUri(Stream fs, Func<string, string> invalidUriHandler)
+    {
+
+        XNamespace relNs = "http://schemas.openxmlformats.org/package/2006/relationships";
+
+        // The stream belongs to the caller, which decides when it is closed.
+        using var za = new ZipArchive(fs, ZipArchiveMode.Update, leaveOpen: true);
+        foreach (var entry in za.Entries.ToList())
+        {
+            // OPC part names are compared case-insensitively, so the casing of the
+            // extension cannot decide whether a relationship part is inspected.
+            if (!entry.Name.EndsWith(".rels", StringComparison.OrdinalIgnoreCase))
+                continue;
+            var replaceEntry = false;
+            XDocument? entryXDoc;
+            using (var entryStream = entry.Open())
             {
-                foreach (var entry in za.Entries.ToList())
+                try
                 {
-                    if (!entry.Name.EndsWith(".rels"))
-                        continue;
-                    bool replaceEntry = false;
-                    XDocument entryXDoc = null;
-                    using (var entryStream = entry.Open())
+                    entryXDoc = XDocument.Load(entryStream);
+                    if (entryXDoc.Root != null && entryXDoc.Root.Name.Namespace == relNs)
                     {
-                        try
+                        var urisToCheck = entryXDoc
+                            .Descendants(relNs + "Relationship")
+                            .Where(r => r.Attribute("TargetMode") != null && (string)r.Attribute("TargetMode") == "External");
+                        foreach (var rel in urisToCheck)
                         {
-                            entryXDoc = XDocument.Load(entryStream);
-                            if (entryXDoc.Root != null && entryXDoc.Root.Name.Namespace == relNs)
+                            var target = (string)rel.Attribute("Target");
+                            if (target != null)
                             {
-                                var urisToCheck = entryXDoc
-                                    .Descendants(relNs + "Relationship")
-                                    .Where(r => r.Attribute("TargetMode") != null && (string)r.Attribute("TargetMode") == "External");
-                                foreach (var rel in urisToCheck)
+                                try
                                 {
-                                    var target = (string)rel.Attribute("Target");
-                                    if (target != null)
-                                    {
-                                        try
-                                        {
-                                            Uri uri = new Uri(target);
-                                        }
-                                        catch (UriFormatException)
-                                        {
-                                            string newUri = invalidUriHandler(target);
-                                            rel.Attribute("Target").Value = newUri;
-                                            replaceEntry = true;
-                                        }
-                                    }
+                                    _ = new Uri(target);
+                                }
+                                catch (UriFormatException)
+                                {
+                                    var newUri = invalidUriHandler(target);
+                                    rel.Attribute("Target")!.Value = newUri;
+                                    replaceEntry = true;
                                 }
                             }
                         }
-                        catch (XmlException)
-                        {
-                            continue;
-                        }
-                    }
-                    if (replaceEntry)
-                    {
-                        var fullName = entry.FullName;
-                        entry.Delete();
-                        var newEntry = za.CreateEntry(fullName);
-                        using (StreamWriter writer = new StreamWriter(newEntry.Open()))
-                        using (XmlWriter xmlWriter = XmlWriter.Create(writer))
-                        {
-                            entryXDoc.WriteTo(xmlWriter);
-                        }
                     }
                 }
+                catch (XmlException)
+                {
+                    continue;
+                }
+            }
+            if (replaceEntry)
+            {
+                var fullName = entry.FullName;
+                entry.Delete();
+                var newEntry = za.CreateEntry(fullName);
+                using var writer = new StreamWriter(newEntry.Open());
+                using var xmlWriter = XmlWriter.Create(writer);
+                entryXDoc.WriteTo(xmlWriter);
             }
         }
-
     }
 
 }

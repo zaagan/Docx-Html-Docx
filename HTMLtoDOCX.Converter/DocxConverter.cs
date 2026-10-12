@@ -1,48 +1,47 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using NotesFor.HtmlToOpenXml;
 using System.IO;
+using HtmlToOpenXml;
 
-namespace HTMLtoDOCX.Converter
+namespace HtmlToDocx.Converter;
+
+public class DocxConverter
 {
-    public class DocxConverter
+    public int ConvertToDocx(string Html, string filename)
     {
-        public int ConvertToDocx(string html, string filename)
+        try
         {
-            try
+            using var generatedDocument = new MemoryStream();
+
+            using (var package = WordprocessingDocument.Create(generatedDocument, WordprocessingDocumentType.Document))
             {
-                if (File.Exists(filename)) File.Delete(filename);
-
-                using (MemoryStream generatedDocument = new MemoryStream())
+                var mainPart = package.MainDocumentPart;
+                if (mainPart == null)
                 {
-                    using (WordprocessingDocument package = WordprocessingDocument.Create(generatedDocument, WordprocessingDocumentType.Document))
-                    {
-                        MainDocumentPart mainPart = package.MainDocumentPart;
-                        if (mainPart == null)
-                        {
-                            mainPart = package.AddMainDocumentPart();
-                            new Document(new Body()).Save(mainPart);
-                        }
-
-                        HtmlConverter converter = new HtmlConverter(mainPart);
-                        converter.ParseHtml(html);
-
-                        mainPart.Document.Save();
-                    }
-
-                    File.WriteAllBytes(filename, generatedDocument.ToArray());
+                    mainPart = package.AddMainDocumentPart();
+                    new Document(new Body()).Save(mainPart);
                 }
 
-                return 1;
-            }
-            catch 
-            {
-                return -1;
+                var converter = new HtmlConverter(mainPart);
+                converter.ParseHtml(Html);
+
+                mainPart.Document.Save();
             }
 
+            // A package writes its zip structure when it is closed, so the stream only
+            // holds a complete document once the block above has ended. Writing the
+            // destination afterwards also leaves any previous document in place when the
+            // conversion fails.
+            File.WriteAllBytes(filename, generatedDocument.ToArray());
 
+            return 1;
+        }
+        catch
+        {
+            return -1;
         }
 
     }
+
 }

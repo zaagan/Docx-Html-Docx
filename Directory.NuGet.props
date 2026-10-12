@@ -1,0 +1,18 @@
+<Project>
+    <PropertyGroup>
+        <NuGetPackageRoot Condition="'$(NuGetPackageRoot)'=='' and '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))'=='true'">$(USERPROFILE)\.nuget\packages\</NuGetPackageRoot>
+        <NuGetPackageRoot Condition="'$(NuGetPackageRoot)'=='' and '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))'!='true'">~/.nuget/packages/</NuGetPackageRoot>
+        <VersionBuildSuffix Condition="'$(Configuration)'!='Release'">*</VersionBuildSuffix>
+        <VersionBuildSuffix Condition="'$(Configuration)'=='Release'">*</VersionBuildSuffix>
+        <NuGetUtilityVersion Condition="'$(NuGetUtilityVersion)'==''">1.0.17</NuGetUtilityVersion>
+        <DirectoryNuGet Condition="'$(DirectoryNuGet)'==''">true</DirectoryNuGet>
+        <VersionBuildSuffix Condition="'$(VersionBuildSuffix)'==''">*</VersionBuildSuffix>
+        <NuGetPackageRoot Condition="'$(NuGetPackageRoot)'==''">$(USERPROFILE)\.nuget\packages\</NuGetPackageRoot>
+        <DocxToHtmlVersion>1.0.0</DocxToHtmlVersion>
+        <DocxToHTMLVersion>1.0.0</DocxToHTMLVersion>
+        <ObfuscarVersion>2.2.37</ObfuscarVersion>
+    </PropertyGroup>
+    <PropertyGroup>
+        <MinimalDirectoryNuGetProps Condition="'$(MinimalDirectoryNuGetProps)'==''">true</MinimalDirectoryNuGetProps>
+    </PropertyGroup>
+</Project>

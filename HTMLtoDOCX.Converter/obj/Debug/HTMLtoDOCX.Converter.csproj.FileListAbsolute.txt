@@ -1,9 +1,0 @@
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\bin\Debug\HTMLtoDOCX.Converter.dll
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\bin\Debug\HTMLtoDOCX.Converter.pdb
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\bin\Debug\DocumentFormat.OpenXml.dll
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\bin\Debug\HtmlToOpenXml.dll
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\bin\Debug\OpenXmlPowerTools.dll
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\bin\Debug\System.IO.Packaging.dll
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\obj\Debug\HTMLtoDOCX.Converter.csprojResolveAssemblyReference.cache
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\obj\Debug\HTMLtoDOCX.Converter.dll
-D:\Workspaces\DotNET Workspace\DocxToHTML\DocxToHTML\HTMLtoDOCX.Converter\obj\Debug\HTMLtoDOCX.Converter.pdb

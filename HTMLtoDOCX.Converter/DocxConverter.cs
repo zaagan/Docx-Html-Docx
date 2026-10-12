@@ -12,27 +12,32 @@ public class DocxConverter
     {
         try
         {
-            if (File.Exists(filename)) File.Delete(filename);
-
             using var generatedDocument = new MemoryStream();
-            using var package = WordprocessingDocument.Create(generatedDocument, WordprocessingDocumentType.Document);
-            var mainPart = package.MainDocumentPart;
-            if (mainPart == null)
+
+            using (var package = WordprocessingDocument.Create(generatedDocument, WordprocessingDocumentType.Document))
             {
-                mainPart = package.AddMainDocumentPart();
-                new Document(new Body()).Save(mainPart);
+                var mainPart = package.MainDocumentPart;
+                if (mainPart == null)
+                {
+                    mainPart = package.AddMainDocumentPart();
+                    new Document(new Body()).Save(mainPart);
+                }
+
+                var converter = new HtmlConverter(mainPart);
+                converter.ParseHtml(Html);
+
+                mainPart.Document.Save();
             }
 
-            var converter = new HtmlConverter(mainPart);
-            converter.ParseHtml(Html);
-
-            mainPart.Document.Save();
-
+            // A package writes its zip structure when it is closed, so the stream only
+            // holds a complete document once the block above has ended. Writing the
+            // destination afterwards also leaves any previous document in place when the
+            // conversion fails.
             File.WriteAllBytes(filename, generatedDocument.ToArray());
 
             return 1;
         }
-        catch 
+        catch
         {
             return -1;
         }

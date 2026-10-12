@@ -13,10 +13,14 @@ public static class UriFixer
     {
 
         XNamespace relNs = "http://schemas.openxmlformats.org/package/2006/relationships";
-        using var za = new ZipArchive(fs, ZipArchiveMode.Update);
+
+        // The stream belongs to the caller, which decides when it is closed.
+        using var za = new ZipArchive(fs, ZipArchiveMode.Update, leaveOpen: true);
         foreach (var entry in za.Entries.ToList())
         {
-            if (!entry.Name.EndsWith(".rels"))
+            // OPC part names are compared case-insensitively, so the casing of the
+            // extension cannot decide whether a relationship part is inspected.
+            if (!entry.Name.EndsWith(".rels", StringComparison.OrdinalIgnoreCase))
                 continue;
             var replaceEntry = false;
             XDocument? entryXDoc;

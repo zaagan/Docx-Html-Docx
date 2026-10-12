@@ -21,7 +21,12 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HtmlToDocx.Converter\HtmlToDocx.Converter.csproj" />
-  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HtmlToDocx.Converter\HtmlToDocx.Converter.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TestSupport\*.cs" Link="TestSupport\%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>
